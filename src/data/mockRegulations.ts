@@ -1,0 +1,303 @@
+import { Regulation } from '../types/regulation';
+
+export const mockRegulations: Regulation[] = [
+  {
+    id: '1',
+    title: 'Consumer Data Protection Standards',
+    agency: 'Federal Trade Commission (FTC)',
+    category: 'Data Privacy',
+    status: 'active',
+    effectiveDate: '2025-01-15',
+    lastUpdated: '2025-12-01',
+    summary:
+      'Establishes comprehensive standards for the collection, storage, and processing of consumer personal data by commercial entities. Requires explicit consent mechanisms and regular privacy impact assessments.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'FTC-2025-0042',
+    tags: ['privacy', 'consumer protection', 'data security'],
+  },
+  {
+    id: '2',
+    title: 'Environmental Emissions Reporting Requirements',
+    agency: 'Environmental Protection Agency (EPA)',
+    category: 'Environmental',
+    status: 'active',
+    effectiveDate: '2024-07-01',
+    lastUpdated: '2025-11-15',
+    summary:
+      'Mandates quarterly emissions reporting for industrial facilities exceeding specified thresholds. Introduces new metrics for greenhouse gas tracking and establishes penalties for non-compliance.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'EPA-2024-0118',
+    tags: ['emissions', 'climate', 'reporting'],
+  },
+  {
+    id: '3',
+    title: 'Digital Banking Security Framework',
+    agency: 'Office of the Comptroller of the Currency (OCC)',
+    category: 'Financial Services',
+    status: 'active',
+    effectiveDate: '2025-03-01',
+    lastUpdated: '2026-01-10',
+    summary:
+      'Defines cybersecurity requirements for digital banking platforms including multi-factor authentication standards, incident response procedures, and third-party vendor risk management protocols.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'OCC-2025-0007',
+    tags: ['cybersecurity', 'banking', 'fintech'],
+  },
+  {
+    id: '4',
+    title: 'AI System Transparency Act',
+    agency: 'National Institute of Standards and Technology (NIST)',
+    category: 'Technology',
+    status: 'proposed',
+    effectiveDate: '2026-06-01',
+    lastUpdated: '2026-02-20',
+    summary:
+      'Proposes mandatory disclosure requirements for AI systems used in high-stakes decision-making. Covers algorithmic auditing, bias testing, and human oversight mandates for automated systems.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'NIST-2026-0003',
+    tags: ['artificial intelligence', 'transparency', 'accountability'],
+  },
+  {
+    id: '5',
+    title: 'Workplace Safety Standards Update',
+    agency: 'Occupational Safety and Health Administration (OSHA)',
+    category: 'Labor & Employment',
+    status: 'amended',
+    effectiveDate: '2023-09-01',
+    lastUpdated: '2025-08-22',
+    summary:
+      'Amends existing workplace safety standards to include updated protocols for remote and hybrid work environments. Introduces ergonomic requirements for home office setups and mental health provisions.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'OSHA-2023-0091',
+    tags: ['workplace safety', 'remote work', 'ergonomics'],
+  },
+  {
+    id: '6',
+    title: 'California Consumer Privacy Act Amendments',
+    agency: 'California Privacy Protection Agency',
+    category: 'Data Privacy',
+    status: 'active',
+    effectiveDate: '2025-07-01',
+    lastUpdated: '2025-10-30',
+    summary:
+      'Strengthens consumer privacy rights under the CCPA including expanded opt-out mechanisms, stricter data minimization requirements, and enhanced enforcement provisions for data brokers.',
+    jurisdiction: 'California',
+    referenceNumber: 'CPPA-2025-0015',
+    tags: ['privacy', 'CCPA', 'consumer rights'],
+  },
+  {
+    id: '7',
+    title: 'Anti-Money Laundering Modernization Rule',
+    agency: 'Financial Crimes Enforcement Network (FinCEN)',
+    category: 'Financial Services',
+    status: 'active',
+    effectiveDate: '2025-05-15',
+    lastUpdated: '2026-01-05',
+    summary:
+      'Updates AML requirements for financial institutions to address cryptocurrency transactions, beneficial ownership reporting, and risk-based compliance frameworks for emerging payment technologies.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'FinCEN-2025-0028',
+    tags: ['AML', 'cryptocurrency', 'compliance'],
+  },
+  {
+    id: '8',
+    title: 'New York Cybersecurity Requirements for Financial Services',
+    agency: 'New York Department of Financial Services (NYDFS)',
+    category: 'Financial Services',
+    status: 'amended',
+    effectiveDate: '2024-01-01',
+    lastUpdated: '2025-09-18',
+    summary:
+      'Amends Part 500 cybersecurity regulation to include enhanced governance requirements, expanded incident notification obligations, and mandatory penetration testing for covered entities.',
+    jurisdiction: 'New York',
+    referenceNumber: 'NYDFS-2024-0002',
+    tags: ['cybersecurity', 'financial services', 'compliance'],
+  },
+  {
+    id: '9',
+    title: 'Pharmaceutical Supply Chain Integrity Act',
+    agency: 'Food and Drug Administration (FDA)',
+    category: 'Healthcare',
+    status: 'active',
+    effectiveDate: '2025-11-01',
+    lastUpdated: '2026-02-15',
+    summary:
+      'Establishes track-and-trace requirements for pharmaceutical products throughout the supply chain. Mandates electronic interoperable systems for verification and serialization of prescription drugs.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'FDA-2025-0056',
+    tags: ['pharmaceuticals', 'supply chain', 'drug safety'],
+  },
+  {
+    id: '10',
+    title: 'Renewable Energy Portfolio Standards',
+    agency: 'Department of Energy (DOE)',
+    category: 'Environmental',
+    status: 'proposed',
+    effectiveDate: '2027-01-01',
+    lastUpdated: '2026-03-01',
+    summary:
+      'Proposes federal renewable energy portfolio standards requiring utilities to derive a minimum percentage of electricity from renewable sources, with escalating targets through 2035.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'DOE-2026-0011',
+    tags: ['renewable energy', 'utilities', 'climate'],
+  },
+  {
+    id: '11',
+    title: 'Telehealth Practice Standards',
+    agency: 'Centers for Medicare & Medicaid Services (CMS)',
+    category: 'Healthcare',
+    status: 'active',
+    effectiveDate: '2025-04-01',
+    lastUpdated: '2025-12-20',
+    summary:
+      'Codifies telehealth practice standards for Medicare-covered services including provider licensing reciprocity, technology requirements, patient consent protocols, and reimbursement parity guidelines.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'CMS-2025-0033',
+    tags: ['telehealth', 'medicare', 'digital health'],
+  },
+  {
+    id: '12',
+    title: 'Federal Acquisition Cybersecurity Standards',
+    agency: 'General Services Administration (GSA)',
+    category: 'Technology',
+    status: 'active',
+    effectiveDate: '2025-10-01',
+    lastUpdated: '2026-01-28',
+    summary:
+      'Establishes cybersecurity requirements for federal contractors and suppliers. Mandates CMMC compliance, incident reporting within 72 hours, and software bill of materials for critical systems.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'GSA-2025-0019',
+    tags: ['cybersecurity', 'federal contractors', 'procurement'],
+  },
+  {
+    id: '13',
+    title: 'Digital Accessibility Standards for Public Services',
+    agency: 'Department of Justice (DOJ)',
+    category: 'Technology',
+    status: 'active',
+    effectiveDate: '2025-06-15',
+    lastUpdated: '2025-11-10',
+    summary:
+      'Updates ADA Title II requirements for state and local government digital services. Mandates WCAG 2.2 AA compliance for websites and mobile applications serving the public.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'DOJ-2025-0044',
+    tags: ['accessibility', 'ADA', 'digital services'],
+  },
+  {
+    id: '14',
+    title: 'Texas Data Privacy and Security Act',
+    agency: 'Texas Attorney General',
+    category: 'Data Privacy',
+    status: 'active',
+    effectiveDate: '2025-07-01',
+    lastUpdated: '2025-10-05',
+    summary:
+      'Establishes consumer privacy rights for Texas residents including data access, correction, and deletion rights. Creates data protection assessment requirements for controllers processing sensitive data.',
+    jurisdiction: 'Texas',
+    referenceNumber: 'TX-AG-2025-0008',
+    tags: ['privacy', 'state law', 'consumer rights'],
+  },
+  {
+    id: '15',
+    title: 'Critical Infrastructure Protection Standards',
+    agency: 'Cybersecurity and Infrastructure Security Agency (CISA)',
+    category: 'Technology',
+    status: 'proposed',
+    effectiveDate: '2026-09-01',
+    lastUpdated: '2026-03-10',
+    summary:
+      'Proposes enhanced cybersecurity requirements for critical infrastructure operators in energy, water, and transportation sectors. Includes mandatory risk assessments and information sharing protocols.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'CISA-2026-0005',
+    tags: ['critical infrastructure', 'cybersecurity', 'national security'],
+  },
+  {
+    id: '16',
+    title: 'International Trade Compliance Updates',
+    agency: 'Bureau of Industry and Security (BIS)',
+    category: 'Trade & Commerce',
+    status: 'amended',
+    effectiveDate: '2024-12-01',
+    lastUpdated: '2026-02-28',
+    summary:
+      'Amends Export Administration Regulations to update export controls on advanced computing technologies, semiconductor equipment, and related items. Revises Entity List designations.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'BIS-2024-0067',
+    tags: ['export controls', 'semiconductors', 'trade compliance'],
+  },
+  {
+    id: '17',
+    title: 'Automobile Safety Modernization Standards',
+    agency: 'National Highway Traffic Safety Administration (NHTSA)',
+    category: 'Transportation',
+    status: 'active',
+    effectiveDate: '2025-09-01',
+    lastUpdated: '2026-01-15',
+    summary:
+      'Updates federal motor vehicle safety standards to address advanced driver assistance systems, over-the-air software updates, and autonomous vehicle testing requirements on public roads.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'NHTSA-2025-0031',
+    tags: ['vehicle safety', 'autonomous vehicles', 'ADAS'],
+  },
+  {
+    id: '18',
+    title: 'Fair Lending Algorithmic Accountability Rule',
+    agency: 'Consumer Financial Protection Bureau (CFPB)',
+    category: 'Financial Services',
+    status: 'proposed',
+    effectiveDate: '2026-07-01',
+    lastUpdated: '2026-03-05',
+    summary:
+      'Proposes requirements for financial institutions using algorithmic or AI-based models in credit decisions. Mandates adverse action notice improvements and algorithmic fairness testing.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'CFPB-2026-0009',
+    tags: ['fair lending', 'AI', 'algorithmic accountability'],
+  },
+  {
+    id: '19',
+    title: 'Clean Water Act Enforcement Updates',
+    agency: 'Environmental Protection Agency (EPA)',
+    category: 'Environmental',
+    status: 'repealed',
+    effectiveDate: '2020-06-01',
+    lastUpdated: '2025-03-15',
+    summary:
+      'Previously established enhanced water quality monitoring requirements for industrial discharge permits. Repealed and replaced by updated environmental compliance framework.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'EPA-2020-0045',
+    tags: ['water quality', 'industrial discharge', 'compliance'],
+  },
+  {
+    id: '20',
+    title: 'Healthcare Interoperability and Patient Access',
+    agency: 'Office of the National Coordinator for Health IT (ONC)',
+    category: 'Healthcare',
+    status: 'active',
+    effectiveDate: '2025-01-01',
+    lastUpdated: '2025-12-08',
+    summary:
+      'Mandates adoption of FHIR-based APIs for health data exchange. Requires healthcare providers and payers to enable patient access to electronic health information without special effort.',
+    jurisdiction: 'Federal',
+    referenceNumber: 'ONC-2025-0012',
+    tags: ['interoperability', 'FHIR', 'health IT'],
+  },
+];
+
+export const agencies = Array.from(
+  new Set(mockRegulations.map((r) => r.agency))
+).sort();
+
+export const categories = Array.from(
+  new Set(mockRegulations.map((r) => r.category))
+).sort();
+
+export const jurisdictions = Array.from(
+  new Set(mockRegulations.map((r) => r.jurisdiction))
+).sort();
+
+export const statuses: Array<{ value: string; label: string }> = [
+  { value: 'active', label: 'Active' },
+  { value: 'proposed', label: 'Proposed' },
+  { value: 'amended', label: 'Amended' },
+  { value: 'repealed', label: 'Repealed' },
+];
