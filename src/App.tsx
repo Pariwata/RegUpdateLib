@@ -4,6 +4,7 @@ import { FilterPanel } from './components/FilterPanel';
 import { ResultsList } from './components/ResultsList';
 import { RegulationDetail } from './components/RegulationDetail';
 import { useRegulationSearch } from './hooks/useRegulationSearch';
+import { AgentChat } from './components/AgentChat';
 import './App.css';
 
 function App() {
@@ -52,6 +53,8 @@ function App() {
           onClose={() => setSelectedRegulation(null)}
         />
       )}
+
+      <AgentChat />
     </div>
   );
 }
