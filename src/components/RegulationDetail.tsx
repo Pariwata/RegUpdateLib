@@ -7,10 +7,11 @@ interface RegulationDetailProps {
 }
 
 const statusColors: Record<string, string> = {
-  active: '#16a34a',
-  proposed: '#ca8a04',
-  amended: '#2563eb',
-  repealed: '#dc2626',
+  'บังคับใช้': '#16a34a',
+  'เสนอร่าง': '#ca8a04',
+  'แก้ไข': '#2563eb',
+  'ยกเลิก': '#dc2626',
+  'รับฟังความคิดเห็น': '#9333ea',
 };
 
 export const RegulationDetail: React.FC<RegulationDetailProps> = ({
@@ -22,7 +23,7 @@ export const RegulationDetail: React.FC<RegulationDetailProps> = ({
       <div className="detail-panel" onClick={(e) => e.stopPropagation()}>
         <div className="detail-header">
           <h2 className="detail-title">{regulation.title}</h2>
-          <button className="detail-close" onClick={onClose} aria-label="Close">
+          <button className="detail-close" onClick={onClose} aria-label="ปิด">
             &times;
           </button>
         </div>
@@ -39,25 +40,25 @@ export const RegulationDetail: React.FC<RegulationDetailProps> = ({
 
         <div className="detail-info-grid">
           <div className="detail-info-item">
-            <span className="detail-label">Agency</span>
+            <span className="detail-label">หน่วยงาน</span>
             <span className="detail-value">{regulation.agency}</span>
           </div>
           <div className="detail-info-item">
-            <span className="detail-label">Category</span>
+            <span className="detail-label">หมวดหมู่</span>
             <span className="detail-value">{regulation.category}</span>
           </div>
           <div className="detail-info-item">
-            <span className="detail-label">Jurisdiction</span>
-            <span className="detail-value">{regulation.jurisdiction}</span>
+            <span className="detail-label">ขอบเขต</span>
+            <span className="detail-value">{regulation.scope}</span>
           </div>
           <div className="detail-info-item">
-            <span className="detail-label">Effective Date</span>
+            <span className="detail-label">วันที่มีผลบังคับ</span>
             <span className="detail-value">
               {formatDate(regulation.effectiveDate)}
             </span>
           </div>
           <div className="detail-info-item">
-            <span className="detail-label">Last Updated</span>
+            <span className="detail-label">อัปเดตล่าสุด</span>
             <span className="detail-value">
               {formatDate(regulation.lastUpdated)}
             </span>
@@ -65,12 +66,12 @@ export const RegulationDetail: React.FC<RegulationDetailProps> = ({
         </div>
 
         <div className="detail-section">
-          <h3 className="detail-section-title">Summary</h3>
+          <h3 className="detail-section-title">สรุป</h3>
           <p className="detail-summary">{regulation.summary}</p>
         </div>
 
         <div className="detail-section">
-          <h3 className="detail-section-title">Tags</h3>
+          <h3 className="detail-section-title">แท็ก</h3>
           <div className="card-tags">
             {regulation.tags.map((tag) => (
               <span key={tag} className="tag">
@@ -85,7 +86,7 @@ export const RegulationDetail: React.FC<RegulationDetailProps> = ({
 };
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
+  return new Date(dateStr).toLocaleDateString('th-TH', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

@@ -21,7 +21,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <input
           type="text"
           className="search-input"
-          placeholder="Search regulations by title, keyword, or reference number..."
+          placeholder="ค้นหาตามชื่อ คำสำคัญ หรือเลขที่อ้างอิง..."
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
         />
@@ -29,14 +29,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <button
             className="search-clear"
             onClick={() => onQueryChange('')}
-            aria-label="Clear search"
+            aria-label="ล้างคำค้นหา"
           >
             &times;
           </button>
         )}
       </div>
       <div className="search-result-count">
-        {resultCount} regulation{resultCount !== 1 ? 's' : ''} found
+        พบ {resultCount} กฎเกณฑ์
       </div>
     </div>
   );

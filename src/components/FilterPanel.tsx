@@ -3,7 +3,7 @@ import { SearchFilters } from '../types/regulation';
 import {
   agencies,
   categories,
-  jurisdictions,
+  scopes,
   statuses,
 } from '../data/mockRegulations';
 
@@ -35,7 +35,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="filter-icon">
             <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
           </svg>
-          Filters
+          ตัวกรอง
           {activeFilterCount > 0 && (
             <span className="filter-badge">{activeFilterCount}</span>
           )}
@@ -51,7 +51,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
         </button>
         {activeFilterCount > 0 && (
           <button className="filter-reset" onClick={onReset}>
-            Clear all
+            ล้างทั้งหมด
           </button>
         )}
       </div>
@@ -60,13 +60,13 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
         <div className="filter-body">
           <div className="filter-grid">
             <div className="filter-group">
-              <label className="filter-label">Agency</label>
+              <label className="filter-label">หน่วยงาน</label>
               <select
                 className="filter-select"
                 value={filters.agency}
                 onChange={(e) => onFilterChange('agency', e.target.value)}
               >
-                <option value="">All Agencies</option>
+                <option value="">ทุกหน่วยงาน</option>
                 {agencies.map((a) => (
                   <option key={a} value={a}>
                     {a}
@@ -76,13 +76,13 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
 
             <div className="filter-group">
-              <label className="filter-label">Category</label>
+              <label className="filter-label">หมวดหมู่</label>
               <select
                 className="filter-select"
                 value={filters.category}
                 onChange={(e) => onFilterChange('category', e.target.value)}
               >
-                <option value="">All Categories</option>
+                <option value="">ทุกหมวดหมู่</option>
                 {categories.map((c) => (
                   <option key={c} value={c}>
                     {c}
@@ -92,13 +92,13 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
 
             <div className="filter-group">
-              <label className="filter-label">Status</label>
+              <label className="filter-label">สถานะ</label>
               <select
                 className="filter-select"
                 value={filters.status}
                 onChange={(e) => onFilterChange('status', e.target.value)}
               >
-                <option value="">All Statuses</option>
+                <option value="">ทุกสถานะ</option>
                 {statuses.map((s) => (
                   <option key={s.value} value={s.value}>
                     {s.label}
@@ -108,23 +108,23 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
 
             <div className="filter-group">
-              <label className="filter-label">Jurisdiction</label>
+              <label className="filter-label">ขอบเขต</label>
               <select
                 className="filter-select"
-                value={filters.jurisdiction}
-                onChange={(e) => onFilterChange('jurisdiction', e.target.value)}
+                value={filters.scope}
+                onChange={(e) => onFilterChange('scope', e.target.value)}
               >
-                <option value="">All Jurisdictions</option>
-                {jurisdictions.map((j) => (
-                  <option key={j} value={j}>
-                    {j}
+                <option value="">ทุกขอบเขต</option>
+                {scopes.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
                   </option>
                 ))}
               </select>
             </div>
 
             <div className="filter-group">
-              <label className="filter-label">Effective From</label>
+              <label className="filter-label">ตั้งแต่วันที่</label>
               <input
                 type="date"
                 className="filter-input"
@@ -134,7 +134,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
 
             <div className="filter-group">
-              <label className="filter-label">Effective To</label>
+              <label className="filter-label">ถึงวันที่</label>
               <input
                 type="date"
                 className="filter-input"
@@ -146,7 +146,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
 
           <div className="filter-sort">
             <div className="filter-group">
-              <label className="filter-label">Sort by</label>
+              <label className="filter-label">เรียงตาม</label>
               <select
                 className="filter-select"
                 value={filters.sortBy}
@@ -157,13 +157,13 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
                   )
                 }
               >
-                <option value="relevance">Relevance</option>
-                <option value="date">Last Updated</option>
-                <option value="title">Title</option>
+                <option value="relevance">ความเกี่ยวข้อง</option>
+                <option value="date">วันที่อัปเดต</option>
+                <option value="title">ชื่อ</option>
               </select>
             </div>
             <div className="filter-group">
-              <label className="filter-label">Order</label>
+              <label className="filter-label">ลำดับ</label>
               <select
                 className="filter-select"
                 value={filters.sortOrder}
@@ -174,8 +174,8 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
                   )
                 }
               >
-                <option value="desc">Descending</option>
-                <option value="asc">Ascending</option>
+                <option value="desc">มากไปน้อย</option>
+                <option value="asc">น้อยไปมาก</option>
               </select>
             </div>
           </div>

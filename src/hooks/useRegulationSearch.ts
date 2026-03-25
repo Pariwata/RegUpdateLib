@@ -48,11 +48,9 @@ export function useRegulationSearch() {
       filtered = filtered.filter((r) => r.status === filters.status);
     }
 
-    // Filter by jurisdiction
-    if (filters.jurisdiction) {
-      filtered = filtered.filter(
-        (r) => r.jurisdiction === filters.jurisdiction
-      );
+    // Filter by scope
+    if (filters.scope) {
+      filtered = filtered.filter((r) => r.scope === filters.scope);
     }
 
     // Date range filters
@@ -73,7 +71,7 @@ export function useRegulationSearch() {
             new Date(b.lastUpdated).getTime();
           break;
         case 'title':
-          cmp = a.title.localeCompare(b.title);
+          cmp = a.title.localeCompare(b.title, 'th');
           break;
         case 'relevance':
         default:
@@ -96,7 +94,7 @@ export function useRegulationSearch() {
     if (filters.agency) count++;
     if (filters.category) count++;
     if (filters.status) count++;
-    if (filters.jurisdiction) count++;
+    if (filters.scope) count++;
     if (filters.dateFrom) count++;
     if (filters.dateTo) count++;
     return count;
