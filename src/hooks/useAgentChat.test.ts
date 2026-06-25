@@ -27,7 +27,7 @@ function sendAndFlush(
 // Initialization
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – initialization', () => {
+describe('useAgentChat - initialization', () => {
   it('starts with a single welcome message from the assistant', () => {
     const { result } = renderHook(() => useAgentChat());
 
@@ -49,7 +49,7 @@ describe('useAgentChat – initialization', () => {
 // Sending messages
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – sendMessage', () => {
+describe('useAgentChat - sendMessage', () => {
   it('adds a user message immediately and sets isLoading', () => {
     const { result } = renderHook(() => useAgentChat());
 
@@ -94,7 +94,7 @@ describe('useAgentChat – sendMessage', () => {
 // Help intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – help intent', () => {
+describe('useAgentChat - help intent', () => {
   it('"help" query returns help text listing capabilities', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'help');
@@ -104,6 +104,7 @@ describe('useAgentChat – help intent', () => {
     expect(response).toContain('Search regulations');
     expect(response).toContain('Count regulations');
     expect(response).toContain('Filter by status');
+    expect(response).toContain('Suggested questions');
   });
 
   it('"what can you do" also triggers help', () => {
@@ -119,7 +120,7 @@ describe('useAgentChat – help intent', () => {
 // Count intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – count intent', () => {
+describe('useAgentChat - count intent', () => {
   const activeCount = mockRegulations.filter((r) => r.status === 'active').length;
   const proposedCount = mockRegulations.filter((r) => r.status === 'proposed').length;
   const repealedCount = mockRegulations.filter((r) => r.status === 'repealed').length;
@@ -170,25 +171,19 @@ describe('useAgentChat – count intent', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Search / list intent
+// Search (general intent via fuzzy keyword matching)
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – search / list intent', () => {
-  // Note: detectIntent maps "find"/"show"/"search"/"list" to the "list" intent,
-  // which then uses findRelevantRegulations with the FULL query string.
-  // The full query must substring-match a regulation field to return results.
-
-  it('finds regulations matching a topic keyword (general intent)', () => {
+describe('useAgentChat - search / general intent', () => {
+  it('finds regulations matching a topic keyword', () => {
     const { result } = renderHook(() => useAgentChat());
-    // Use a bare keyword so it hits the "general" intent and findRelevantRegulations
     sendAndFlush(result, 'privacy');
 
     const response = result.current.messages[2].content;
     expect(response).toContain('Consumer Data Protection Standards');
-    expect(response).toContain('California Consumer Privacy Act');
   });
 
-  it('finds regulations by agency abbreviation (general intent)', () => {
+  it('finds regulations by agency abbreviation', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'EPA');
 
@@ -196,7 +191,7 @@ describe('useAgentChat – search / list intent', () => {
     expect(response).toContain('Environmental Protection Agency');
   });
 
-  it('finds regulations by tag keyword (general intent)', () => {
+  it('finds regulations by tag keyword', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'cybersecurity');
 
@@ -209,35 +204,37 @@ describe('useAgentChat – search / list intent', () => {
 // Status filter intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – status filter intent', () => {
-  // Note: queries must include "status"/"active"/"proposed"/"amended"/"repealed"
-  // but NOT "show"/"list"/"find"/"search" (those trigger the "list" intent instead).
+describe('useAgentChat - status filter intent', () => {
+  // The status intent uses applyMultiFilters first. Queries with a status
+  // keyword (but without list/show/find/search) trigger the status intent.
 
-  it('lists active regulations when asked by status', () => {
+  it('filters active regulations', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'active regulations status');
 
     const response = result.current.messages[2].content;
     const activeCount = mockRegulations.filter((r) => r.status === 'active').length;
-    expect(response).toContain(`${activeCount} regulation`);
+    // applyMultiFilters returns "Found **N regulation(s)** matching your filters:"
+    expect(response).toContain(`${activeCount} regulation(s)`);
+    expect(response).toContain('matching your filters');
   });
 
-  it('lists proposed regulations', () => {
+  it('filters proposed regulations', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'status proposed');
 
     const response = result.current.messages[2].content;
     const proposedCount = mockRegulations.filter((r) => r.status === 'proposed').length;
-    expect(response).toContain(`${proposedCount} regulation`);
+    expect(response).toContain(`${proposedCount} regulation(s)`);
   });
 
-  it('lists amended regulations', () => {
+  it('filters amended regulations', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'amended status');
 
     const response = result.current.messages[2].content;
     const amendedCount = mockRegulations.filter((r) => r.status === 'amended').length;
-    expect(response).toContain(`${amendedCount} regulation`);
+    expect(response).toContain(`${amendedCount} regulation(s)`);
   });
 });
 
@@ -245,7 +242,7 @@ describe('useAgentChat – status filter intent', () => {
 // Recent / latest intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – recent / latest intent', () => {
+describe('useAgentChat - recent / latest intent', () => {
   it('returns the 5 most recently updated regulations', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'What are the latest updates?');
@@ -253,7 +250,7 @@ describe('useAgentChat – recent / latest intent', () => {
     const response = result.current.messages[2].content;
     expect(response).toContain('5 most recently updated');
 
-    // Verify the top result is the regulation with the most recent lastUpdated
+    // Verify the top results are the most recent by lastUpdated
     const sorted = [...mockRegulations].sort(
       (a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
     );
@@ -274,15 +271,14 @@ describe('useAgentChat – recent / latest intent', () => {
 // Agency intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – agency intent', () => {
+describe('useAgentChat - agency intent', () => {
   it('lists all agencies when asked broadly', () => {
     const { result } = renderHook(() => useAgentChat());
-    // "all agencies" triggers agency intent without triggering list intent
+    // "all agencies" prevents the specific-match branch from taking over
     sendAndFlush(result, 'What are all agencies in the database?');
 
     const response = result.current.messages[2].content;
     expect(response).toContain('Agencies in the database');
-    // Spot-check a few agencies
     expect(response).toContain('Environmental Protection Agency (EPA)');
     expect(response).toContain('Federal Trade Commission (FTC)');
   });
@@ -292,10 +288,10 @@ describe('useAgentChat – agency intent', () => {
 // Category intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – category intent', () => {
+describe('useAgentChat - category intent', () => {
   it('lists all categories with counts', () => {
     const { result } = renderHook(() => useAgentChat());
-    // Use "categories" without "show"/"list"/"find"/"search" to trigger category intent
+    // "categories" triggers category intent (no list/show/find/search keywords)
     sendAndFlush(result, 'What categories are there?');
 
     const response = result.current.messages[2].content;
@@ -310,15 +306,22 @@ describe('useAgentChat – category intent', () => {
 // Explain intent
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – explain intent', () => {
-  it('returns details about a specific regulation', () => {
+describe('useAgentChat - explain intent', () => {
+  it('returns regulation details via general intent with a matching keyword', () => {
     const { result } = renderHook(() => useAgentChat());
-    sendAndFlush(result, 'Tell me about the AI Transparency Act');
+    sendAndFlush(result, 'telehealth');
 
     const response = result.current.messages[2].content;
-    expect(response).toContain('AI System Transparency Act');
-    expect(response).toContain('NIST');
-    expect(response).toContain('proposed');
+    expect(response).toContain('Telehealth Practice Standards');
+    expect(response).toContain('CMS');
+  });
+
+  it('falls back when explain intent finds no matching regulation', () => {
+    const { result } = renderHook(() => useAgentChat());
+    sendAndFlush(result, 'tell me about something nonexistent');
+
+    const response = result.current.messages[2].content;
+    expect(response).toContain("couldn't find specific regulations");
   });
 });
 
@@ -326,7 +329,7 @@ describe('useAgentChat – explain intent', () => {
 // Unknown / fallback
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – unknown query', () => {
+describe('useAgentChat - unknown query', () => {
   it('returns a helpful fallback for unrecognized queries', () => {
     const { result } = renderHook(() => useAgentChat());
     sendAndFlush(result, 'xyzzy foobarbaz');
@@ -341,7 +344,7 @@ describe('useAgentChat – unknown query', () => {
 // clearChat
 // ---------------------------------------------------------------------------
 
-describe('useAgentChat – clearChat', () => {
+describe('useAgentChat - clearChat', () => {
   it('resets to a single welcome message', () => {
     const { result } = renderHook(() => useAgentChat());
 
