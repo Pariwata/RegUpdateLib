@@ -734,6 +734,69 @@ body {
   color: var(--color-text-secondary);
 }
 
+/* ===== Page Loading ===== */
+.page-loading {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+/* ===== Page Signature / Footer ===== */
+.page-signature {
+  background: var(--color-primary);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+.signature-content {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.signature-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.signature-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.signature-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.signature-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+}
+
+.signature-separator {
+  opacity: 0.4;
+}
+
+.signature-disclaimer {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 0.75rem;
+  margin-top: 0.25rem;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 640px) {
   .app-header {
@@ -798,5 +861,14 @@ body {
 
   .alert-filter-row .filter-select {
     width: 100%;
+  }
+
+  .signature-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .signature-separator {
+    display: none;
   }
 }

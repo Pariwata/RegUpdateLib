@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { NavBar } from './components/NavBar';
-import { SearchPage } from './pages/SearchPage';
-import { AlertsPage } from './pages/AlertsPage';
-import { HearingsPage } from './pages/HearingsPage';
+import { PageSignature } from './components/PageSignature';
+import { pages, defaultPath } from './config/pageConfig';
 import './App.css';
 
 function App() {
@@ -21,13 +20,21 @@ function App() {
       <NavBar />
 
       <main className="app-main">
-        <Routes>
-          <Route path="/" element={<Navigate to="/search" replace />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/alerts" element={<AlertsPage />} />
-          <Route path="/hearings" element={<HearingsPage />} />
-        </Routes>
+        <Suspense fallback={<div className="page-loading">กำลังโหลด...</div>}>
+          <Routes>
+            <Route path="/" element={<Navigate to={defaultPath} replace />} />
+            {pages.map((page) => (
+              <Route
+                key={page.path}
+                path={page.path}
+                element={<page.component />}
+              />
+            ))}
+          </Routes>
+        </Suspense>
       </main>
+
+      <PageSignature />
     </div>
   );
 }
