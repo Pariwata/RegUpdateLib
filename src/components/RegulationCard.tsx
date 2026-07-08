@@ -7,10 +7,11 @@ interface RegulationCardProps {
 }
 
 const statusColors: Record<string, string> = {
-  active: '#16a34a',
-  proposed: '#ca8a04',
-  amended: '#2563eb',
-  repealed: '#dc2626',
+  'บังคับใช้': '#16a34a',
+  'เสนอร่าง': '#ca8a04',
+  'แก้ไข': '#2563eb',
+  'ยกเลิก': '#dc2626',
+  'รับฟังความคิดเห็น': '#9333ea',
 };
 
 export const RegulationCard: React.FC<RegulationCardProps> = ({
@@ -34,13 +35,13 @@ export const RegulationCard: React.FC<RegulationCardProps> = ({
         <span className="card-separator">|</span>
         <span className="card-category">{regulation.category}</span>
         <span className="card-separator">|</span>
-        <span className="card-jurisdiction">{regulation.jurisdiction}</span>
+        <span className="card-scope">{regulation.scope}</span>
       </div>
       <p className="card-summary">{regulation.summary}</p>
       <div className="card-footer">
         <div className="card-dates">
-          <span>Effective: {formatDate(regulation.effectiveDate)}</span>
-          <span>Updated: {formatDate(regulation.lastUpdated)}</span>
+          <span>มีผลบังคับ: {formatDate(regulation.effectiveDate)}</span>
+          <span>อัปเดต: {formatDate(regulation.lastUpdated)}</span>
         </div>
         <div className="card-tags">
           {regulation.tags.map((tag) => (
@@ -55,7 +56,7 @@ export const RegulationCard: React.FC<RegulationCardProps> = ({
 };
 
 function formatDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-US', {
+  return new Date(dateStr).toLocaleDateString('th-TH', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

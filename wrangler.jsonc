@@ -1,0 +1,14 @@
+{
+  // Cloudflare Workers configuration for deploying the Create React App
+  // build output as static assets with single-page-application routing.
+  // https://developers.cloudflare.com/workers/static-assets/
+  "name": "reglibrary",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    // CRA outputs the production build to ./build (see `npm run build`).
+    "directory": "./build",
+    // Serve index.html for unknown paths so client-side routes such as
+    // /search, /alerts, and /hearings resolve correctly on hard refresh.
+    "not_found_handling": "single-page-application"
+  }
+}

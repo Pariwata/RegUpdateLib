@@ -1,57 +1,40 @@
-import React from 'react';
-import { SearchBar } from './components/SearchBar';
-import { FilterPanel } from './components/FilterPanel';
-import { ResultsList } from './components/ResultsList';
-import { RegulationDetail } from './components/RegulationDetail';
-import { useRegulationSearch } from './hooks/useRegulationSearch';
+import React, { Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { NavBar } from './components/NavBar';
+import { PageSignature } from './components/PageSignature';
+import { pages, defaultPath } from './config/pageConfig';
 import './App.css';
 
 function App() {
-  const {
-    filters,
-    updateFilter,
-    resetFilters,
-    results,
-    selectedRegulation,
-    setSelectedRegulation,
-    activeFilterCount,
-  } = useRegulationSearch();
-
   return (
     <div className="app">
       <header className="app-header">
         <div className="header-content">
-          <h1 className="app-title">Regulatory Search</h1>
+          <h1 className="app-title">ระบบค้นหากฎเกณฑ์ธนาคาร</h1>
           <p className="app-subtitle">
-            Search and explore regulatory updates across agencies and
-            jurisdictions
+            ค้นหากฎหมายและประกาศกฎเกณฑ์ของหน่วยงานกำกับดูแลที่ใช้บังคับกับธนาคาร
           </p>
         </div>
       </header>
 
+      <NavBar />
+
       <main className="app-main">
-        <SearchBar
-          query={filters.query}
-          onQueryChange={(q) => updateFilter('query', q)}
-          resultCount={results.length}
-        />
-
-        <FilterPanel
-          filters={filters}
-          onFilterChange={updateFilter}
-          onReset={resetFilters}
-          activeFilterCount={activeFilterCount}
-        />
-
-        <ResultsList results={results} onSelect={setSelectedRegulation} />
+        <Suspense fallback={<div className="page-loading">กำลังโหลด...</div>}>
+          <Routes>
+            <Route path="/" element={<Navigate to={defaultPath} replace />} />
+            {pages.map((page) => (
+              <Route
+                key={page.path}
+                path={page.path}
+                element={<page.component />}
+              />
+            ))}
+          </Routes>
+        </Suspense>
       </main>
 
-      {selectedRegulation && (
-        <RegulationDetail
-          regulation={selectedRegulation}
-          onClose={() => setSelectedRegulation(null)}
-        />
-      )}
+      <PageSignature />
     </div>
   );
 }

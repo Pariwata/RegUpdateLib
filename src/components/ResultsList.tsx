@@ -19,10 +19,9 @@ export const ResultsList: React.FC<ResultsListProps> = ({
           <path d="m21 21-4.35-4.35" />
           <path d="M8 11h6" />
         </svg>
-        <h3 className="empty-title">No regulations found</h3>
+        <h3 className="empty-title">ไม่พบกฎเกณฑ์</h3>
         <p className="empty-text">
-          Try adjusting your search terms or filters to find what you're looking
-          for.
+          ลองปรับคำค้นหาหรือตัวกรองเพื่อค้นหาสิ่งที่ต้องการ
         </p>
       </div>
     );
