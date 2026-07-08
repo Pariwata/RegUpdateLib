@@ -1,5 +1,4 @@
 import { useState, useMemo, useCallback } from 'react';
-import { HearingItem } from '../types/regulation';
 import { mockHearings } from '../data/mockHearings';
 
 interface HearingFilters {
